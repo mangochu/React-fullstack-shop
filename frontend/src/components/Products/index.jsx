@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import Product from "../Product"
-import { popularProducts } from "./data"
+// import { popularProducts } from "./data"
 import { Container } from "./ProductsElements"
 import axios from 'axios'
 

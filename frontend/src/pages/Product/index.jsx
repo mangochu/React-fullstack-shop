@@ -36,6 +36,11 @@ const Product = () => {
     }
   }
 
+  const handleClick = () => {
+    //update cart
+
+  }
+
   return (
     <Container>
       <Announcement />
@@ -53,7 +58,7 @@ const Product = () => {
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
-              {product.color?.map(c => <FilterColor color={c} key={c} onClick={setColor(c)} />)}
+              {product.color?.map(c => <FilterColor color={c} key={c} onClick={() => setColor(c)} />)}
             </Filter>
             <Filter>
               <FilterTitle>Size</FilterTitle>
@@ -68,7 +73,7 @@ const Product = () => {
               <Amount>{quantity}</Amount>
               <Add onClick={() => handleQuantity('inc')} />
             </AmountContainer>
-            <Button>ADD TO CART</Button>
+            <Button onClick={handleClick()}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
