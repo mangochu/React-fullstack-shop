@@ -7,6 +7,8 @@ import { AddContainer, Amount, AmountContainer, Button, Container, Desc, Filter,
 import { useLocation } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { publicRequest } from "../../requestMethods";
+import { addProduct } from '../../redux/cartRedux'
+import { useDispatch } from 'react-redux'
 
 
 const Product = () => {
@@ -16,6 +18,7 @@ const Product = () => {
   const [quantity, setQuantity] = useState(1)
   const [color, setColor] = useState('')
   const [size, setSize] = useState('')
+  const dispatch = useDispatch()
 
 
   useEffect(() => {
@@ -38,7 +41,7 @@ const Product = () => {
 
   const handleClick = () => {
     //update cart
-
+    dispatch(addProduct({ ...product, quantity, color, size }))
   }
 
   return (
@@ -73,7 +76,7 @@ const Product = () => {
               <Amount>{quantity}</Amount>
               <Add onClick={() => handleQuantity('inc')} />
             </AmountContainer>
-            <Button onClick={handleClick()}>ADD TO CART</Button>
+            <Button onClick={handleClick}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
