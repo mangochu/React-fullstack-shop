@@ -4,9 +4,36 @@ import Footer from "../../components/Footer"
 import Navbar from "../../components/Navbar"
 import { Bottom, Button, Container, Details, Hr, Image, Info, PriceDetail, Product, ProductAmount, ProductAmountContainer, ProductColor, ProductDetail, ProductId, ProductName, ProductPrice, ProductSize, Summary, SummaryItem, SummaryItemPrice, SummaryItemText, SummaryTitle, Title, Top, TopButton, TopText, TopTexts, Wrapper } from "./CartElements";
 import { useSelector } from 'react-redux'
+import StripeCheckout from 'react-stripe-checkout'
+import { useEffect, useState } from "react";
+import { userRequest } from '../../requestMethods'
+import { useNavigate } from 'react-router-dom'
+
+const avatar = require("./../../assets/images/avatar.gif").default
+
+const KEY = process.env.REACT_APP_STRIPE
 
 const Cart = () => {
   const cart = useSelector(state => state.cart)
+  const [stripeToken, setStripeToken] = useState(null)
+  const history = useNavigate()
+
+  const onToken = token => {
+    setStripeToken(token)
+  }
+
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await userRequest.post('/checkout/payment', {
+          tokenId: stripeToken.id,
+          amount: cart.total * 100,
+        })
+        history('/success', { data: res.data })
+      } catch { }
+    }
+    stripeToken && cart.total >= 1 && makeRequest()
+  }, [stripeToken, cart.total, history])
   return (
     <Container>
       <Navbar />
@@ -25,32 +52,32 @@ const Cart = () => {
           <Info>
             {cart.products.map(product => (
               <>
-              <Product>
-                <ProductDetail>
-                  <Image src={product.img} />
-                  <Details>
-                    <ProductName>
-                      <b>Product:</b> {product.title}
-                    </ProductName>
-                    <ProductId>
-                      <b>ID:</b> {product._id}
-                    </ProductId>
-                    <ProductColor color={product.color} />
-                    <ProductSize>
-                      <b>Size:</b> {product.size}
-                    </ProductSize>
-                  </Details>
-                </ProductDetail>
-                <PriceDetail>
-                  <ProductAmountContainer>
-                    <Remove />
-                    <ProductAmount>{product.quantity}</ProductAmount>
-                    <Add />
-                  </ProductAmountContainer>
-                  <ProductPrice>$ {product.price * product.quantity}</ProductPrice>
-                </PriceDetail>
-              </Product>
-              <Hr />
+                <Product>
+                  <ProductDetail>
+                    <Image src={product.img} />
+                    <Details>
+                      <ProductName>
+                        <b>Product:</b> {product.title}
+                      </ProductName>
+                      <ProductId>
+                        <b>ID:</b> {product._id}
+                      </ProductId>
+                      <ProductColor color={product.color} />
+                      <ProductSize>
+                        <b>Size:</b> {product.size}
+                      </ProductSize>
+                    </Details>
+                  </ProductDetail>
+                  <PriceDetail>
+                    <ProductAmountContainer>
+                      <Remove />
+                      <ProductAmount>{product.quantity}</ProductAmount>
+                      <Add />
+                    </ProductAmountContainer>
+                    <ProductPrice>$ {product.price * product.quantity}</ProductPrice>
+                  </PriceDetail>
+                </Product>
+                <Hr />
               </>
             ))}
           </Info>
@@ -72,7 +99,18 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
+            <StripeCheckout
+              name='Mango Shop'
+              image={avatar}
+              billingAddress
+              shippingAddress
+              description={`Your total is $${cart.total}`}
+              amount={cart.total * 100}
+              token={onToken}
+              stripeKey={KEY}
+            >
+              <Button>CHECKOUT NOW</Button>
+            </StripeCheckout>
           </Summary>
         </Bottom>
       </Wrapper>
