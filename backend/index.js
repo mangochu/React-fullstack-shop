@@ -8,6 +8,7 @@ const authRoute = require('./routes/auth')
 const productRoute = require('./routes/product')
 const cartRoute = require('./routes/cart')
 const orderRoute = require('./routes/order')
+const cors = require('cors')
 
 const PORT = process.env.PORT || 5000
 
@@ -17,6 +18,7 @@ mongoose.connect(process.env.MONGO_URL)
   .then(() => console.log("database connection successful!"))
   .catch((err) => console.log(err))
 
+app.use(cors()) // CORS policy
 app.use(express.json())
 app.use('/api/auth', authRoute)
 app.use('/api/users', userRoute)
