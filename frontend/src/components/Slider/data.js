@@ -14,7 +14,7 @@ export const sliderItems = [
     bg: 'fcf1ed',
   },
   {
-    id: 1,
+    id: 3,
     img: require("./../../assets/images/Slide03.png").default,
     title: "WINTER SALE",
     desc: "WINTER SALE IS COMING BACK NOW, THIS TIME WE ALSO PREPARE OUR BIGGEST DISCOUNT OF THE YEAR FOR YOU! DON'T MISS IT!",

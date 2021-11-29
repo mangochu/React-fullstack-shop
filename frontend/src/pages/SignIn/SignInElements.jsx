@@ -48,6 +48,10 @@ export const Button = styled.button`
   color: white;
   cursor: pointer;
   margin-bottom: 10px;
+  &:disabled{
+    color: green;
+    cursor: not-allowed;
+  }
 `;
 
 export const Link = styled.a`
@@ -56,3 +60,7 @@ export const Link = styled.a`
   text-decoration: underline;
   cursor: pointer;
 `;
+
+export const Error = styled.span`
+  color: red;
+`
