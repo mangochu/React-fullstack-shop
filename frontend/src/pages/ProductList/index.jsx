@@ -6,13 +6,19 @@ import Products from "../../components/Products";
 import { Container, Filter, FilterContainer, FilterText, Option, Select, Title } from "./ProductListElements";
 import { useLocation } from 'react-router-dom'
 import { useState } from "react";
+import Sidebar from "../../components/Sidebar";
 
 const ProductList = () => {
   const location = useLocation()
   const cat = location.pathname.split('/')[2]
   const [filters, setFilters] = useState({})
   const [sort, setSort] = useState("Newest")
+  const [isOpen, setIsOpen] = useState(false)
 
+  const toggle = () => {
+    setIsOpen(!isOpen)
+  }
+  
   const handleFilters = (e) => {
     const value = e.target.value
     setFilters({
@@ -24,8 +30,9 @@ const ProductList = () => {
   // console.log(filters);
   return (
     <Container>
+      <Sidebar isOpen={isOpen} toggle={toggle} />
       <Announcement />
-      <Navbar />
+      <Navbar toggle={toggle}/>
       <Title>{cat}</Title>
       <FilterContainer>
         <Filter>

@@ -8,6 +8,7 @@ import StripeCheckout from 'react-stripe-checkout'
 import { useEffect, useState } from "react";
 import { userRequest } from '../../requestMethods'
 import { useNavigate } from 'react-router-dom'
+import Sidebar from "../../components/Sidebar";
 
 const avatar = require("./../../assets/images/avatar.gif").default
 
@@ -17,6 +18,11 @@ const Cart = () => {
   const cart = useSelector(state => state.cart)
   const [stripeToken, setStripeToken] = useState(null)
   const history = useNavigate()
+  const [isOpen, setIsOpen] = useState(false)
+
+  const toggle = () => {
+    setIsOpen(!isOpen)
+  }
 
   const onToken = token => {
     setStripeToken(token)
@@ -36,12 +42,13 @@ const Cart = () => {
   }, [stripeToken, cart.total, history])
   return (
     <Container>
-      <Navbar />
+      <Sidebar isOpen={isOpen} toggle={toggle} />
+      <Navbar toggle={toggle} />
       <Announcement />
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+          <TopButton onClick={()=>history(-1)}>CONTINUE SHOPPING</TopButton>
           <TopTexts>
             <TopText>Shopping Bag(2)</TopText>
             <TopText>Your Wishlist (0)</TopText>

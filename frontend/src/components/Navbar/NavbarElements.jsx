@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../../RWD";
 
@@ -7,6 +8,7 @@ export const Container = styled.div`
 `
 
 export const Wrapper = styled.div`
+  position: relative;
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
@@ -14,16 +16,21 @@ export const Wrapper = styled.div`
   ${mobile({ padding: '10px 0' })}
 `
 
+export const MobileIcon = styled.div`
+  display: none;
+  ${mobile({ display: 'block', position: 'relative', fontSize: '2.2rem', marginLeft: '10px' })}
+`
+
 export const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
+  ${mobile({ display: 'none' })}
 `
 
 export const Language = styled.span`
   font-size: 14px;
   cursor: pointer;
-  ${mobile({ display: 'none' })}
 `
 
 export const SearchContainer = styled.div`
@@ -54,11 +61,13 @@ export const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  ${mobile({ justifyContent: 'center', flex: 2 })}
+  ${mobile({ display: 'none' })}
 `
-export const MenuItem = styled.div`
+export const MenuItem = styled(Link)`
   font-size: 14px;
   cursor: pointer;
   margin-left: 20px;
-  ${mobile({ fontSize: '12px', marginLeft: '10px' })}
+  text-decoration: none;
+  color: #000;
+  ${mobile({ marginLeft: 0, marginRight: '15px' })}
 `
