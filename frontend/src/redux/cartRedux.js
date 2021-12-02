@@ -21,6 +21,7 @@ const cartSlice = createSlice({
         state.quantity += 1
         state.products.push(action.payload)
         state.total += action.payload.price * action.payload.cartQuantity
+        toast.success(`${action.payload.title} to cart`, { position: 'bottom-left' })
       }
     },
     addToCart: (state, action) => {
