@@ -1,20 +1,20 @@
 export const categories = [
   {
     id: 1,
-    img: "https://images.pexels.com/photos/5886041/pexels-photo-5886041.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    title: "SHIRT STYLE!",
-    cat: "women"
+    img: "https://res.cloudinary.com/dbedwpjux/image/upload/v1638365219/React-shop-fullstack/Category/pexels-lucas-queiroz-1852382_luure2.jpg",
+    title: "SHIRT STYLE",
+    cat: "shirt"
   },
   {
     id: 2,
-    img: "https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    title: "LOUNGEWEAR LOVE",
+    img: "https://res.cloudinary.com/dbedwpjux/image/upload/v1638365216/React-shop-fullstack/Category/pexels-harsh-kushwaha-1721558_kmgrpx.jpg",
+    title: "WINTER COAT",
     cat: "coat"
   },
   {
     id: 3,
-    img: "https://images.pexels.com/photos/5480696/pexels-photo-5480696.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    title: "LIGHT JACKETS",
-    cat: "jeans"
+    img: "https://res.cloudinary.com/dbedwpjux/image/upload/v1638365312/React-shop-fullstack/Category/pexels-ali-pazani-2584269_fj0sg8.jpg",
+    title: "DENIM JACKET",
+    cat: "jacket"
   },
 ];

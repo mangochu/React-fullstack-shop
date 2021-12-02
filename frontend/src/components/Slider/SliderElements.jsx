@@ -40,12 +40,14 @@ export const Slide = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: space-around;
+  padding-top: 50px;
   background-color: #${props => props.bg};
 `
 
 export const ImageContainer = styled.div`
   height: 100%;
-  flex: 3;
+  flex: 1;
   display: flex;
   justify-content: center;
 `
@@ -55,12 +57,21 @@ export const Image = styled.img`
 `
 
 export const InfoContainer = styled.div`
-  flex: 4;
+  flex: 1;
   padding: 50px;
 `
 
+export const TextWrapper = styled.div`
+max-width: 740px;
+`
+
 export const Title = styled.h1`
-  font-size: 70px;
+  font-size: 75px;
+  color: #${props => props.tc};
+`
+
+export const SubTitle = styled.h2`
+  font-size: 30px;
 `
 
 export const Desc = styled.p`
@@ -68,6 +79,7 @@ export const Desc = styled.p`
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 3px;
+  line-height: 1.5;
 `
 
 export const Button = styled.button`

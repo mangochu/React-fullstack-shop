@@ -1,29 +1,31 @@
-import { Facebook, Instagram, MailOutline, Phone, Pinterest, Room, Twitter } from "@material-ui/icons";
+import { Facebook, GitHub, Instagram, MailOutline, Phone, Room, Twitter } from "@material-ui/icons";
 import { Center, ContactItem, Container, Desc, Left, List, ListItem, Logo, Payment, Right, SocialContainer, SocialIcon, Title } from "./FooterElements";
+const img1 = require('../../assets/images/Visa.svg').default
+const img2 = require('../../assets/images/Mastercard.svg').default
+const img3 = require('../../assets/images/Apple Pay.svg').default
+const img4 = require('../../assets/images/Google Pay.svg').default
 
 
 const Footer = () => {
   return (
     <Container>
       <Left>
-        <Logo>MANGO.</Logo>
+        <Logo to='/'>MANGO.</Logo>
         <Desc>
-          There are many variations of passages of Lorem Ipsum available, but
-          the majority have suffered alteration in some form, by injected
-          humour, or randomised words which don’t look even slightly believable.
+         This is my personal practice website of Ecommerce Web Shop.
         </Desc>
         <SocialContainer>
-          <SocialIcon color="3B5999">
+          <SocialIcon href='https://www.facebook.com/'>
             <Facebook />
           </SocialIcon>
-          <SocialIcon color="E4405F">
+          <SocialIcon href='https://www.instagram.com/'>
             <Instagram />
           </SocialIcon>
-          <SocialIcon color="55ACEE">
+          <SocialIcon href='https://twitter.com/'>
             <Twitter />
           </SocialIcon>
-          <SocialIcon color="E60023">
-            <Pinterest />
+          <SocialIcon href='https://github.com/'>
+            <GitHub />
           </SocialIcon>
         </SocialContainer>
       </Left>
@@ -45,15 +47,18 @@ const Footer = () => {
       <Right>
         <Title>Contact</Title>
         <ContactItem>
-          <Room style={{ marginRight: "10px" }} /> 622 Dixie Path , South Tobinchester 98336
+          <Room style={{ marginRight: "10px" }} /> No. 1050, Nanxing Rd., Beitun Dist., Taichung City 406015, Taiwan (R.O.C.)
         </ContactItem>
         <ContactItem>
           <Phone style={{ marginRight: "10px" }} /> +1 234 56 78
         </ContactItem>
         <ContactItem>
-          <MailOutline style={{ marginRight: "10px" }} /> contact@lama.dev
+          <MailOutline style={{ marginRight: "10px" }} /> mangochu81806@gmail.com
         </ContactItem>
-        <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
+        <Payment src={img1} />
+        <Payment src={img2} />
+        <Payment src={img3} />
+        <Payment src={img4} />
       </Right>
     </Container>
   );

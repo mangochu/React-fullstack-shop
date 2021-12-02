@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -29,12 +30,15 @@ export const Bottom = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  bottom: 0;
+  margin: 0 10px;
+  bottom: 10px;
 `
 
-export const Logo = styled.h1`
+export const Logo = styled(Link)`
+  font-size: 2em;
+  text-decoration: none;
+  color: black;
   display: flex;
-  justify-content: center;
 `
 
 export const Desc = styled.div`

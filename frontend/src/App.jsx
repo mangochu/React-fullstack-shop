@@ -5,6 +5,7 @@ import ProductList from "./pages/ProductList";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Success from "./pages/Success";
+import NotFound from "./pages/NotFound";
 import {
   BrowserRouter as Router,
   Routes,
@@ -12,6 +13,9 @@ import {
   Navigate
 } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 
 
 
@@ -19,7 +23,9 @@ const App = () => {
   const user = useSelector(state => state.user.currentUser)
   return (
     <Router>
+      <ToastContainer />
       <Routes>
+        <Route path='*' element={<NotFound />} />
         <Route path="/" element={<Home />} />
         <Route path="products" element={<ProductList />}>
           <Route path=":category" element={<ProductList />} />

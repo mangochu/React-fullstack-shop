@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from '../../RWD'
 
@@ -13,7 +14,11 @@ export const Left = styled.div`
   padding: 20px;
 `;
 
-export const Logo = styled.h1``;
+export const Logo = styled(Link)`
+  font-size: 2em;
+  text-decoration: none;
+  color: black;
+`;
 
 export const Desc = styled.p`
   margin: 20px 0px;
@@ -23,16 +28,16 @@ export const SocialContainer = styled.div`
   display: flex;
 `;
 
-export const SocialIcon = styled.div`
+export const SocialIcon = styled.a`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  color: white;
-  background-color: #${(props) => props.color};
+  color: black;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 20px;
+  text-decoration: none;
 `;
 
 export const Center = styled.div`
@@ -71,5 +76,5 @@ export const ContactItem = styled.div`
 `;
 
 export const Payment = styled.img`
-    width: 50%;
+    width: 50px;
 `;

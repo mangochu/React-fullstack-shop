@@ -51,8 +51,11 @@ export const Center = styled.div`
   text-align: center;
 `
 
-export const NavLogo = styled.h1`
+export const NavLogo = styled(Link)`
+  text-decoration: none;
+  color: black;
   font-weight: bold;
+  font-size: 2em;
   ${mobile({ fontSize: '24px' })}
 `
 
@@ -62,8 +65,38 @@ export const Right = styled.div`
   align-items: center;
   justify-content: flex-end;
   ${mobile({ display: 'none' })}
+  display: ${prop => prop.show ? 'flex' : 'none'};
 `
+
+export const Right2 = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  ${mobile({ display: 'none' })}
+  display: ${prop => prop.show ? 'none' : 'flex'};
+`
+export const User = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 20px;
+  text-decoration: none;
+  color: #000;
+`
+
 export const MenuItem = styled(Link)`
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 20px;
+  text-decoration: none;
+  color: #000;
+  ${mobile({ marginLeft: 0, marginRight: '15px' })}
+`
+
+export const MenuItem2 = styled.div`
   font-size: 14px;
   cursor: pointer;
   margin-left: 20px;

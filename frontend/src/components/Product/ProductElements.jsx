@@ -40,7 +40,7 @@ export const Circle = styled.div`
   position: absolute;
 `
 export const Image = styled.img`
-  height: 75%;
+  height: 100%;
   z-index: 2;
 `
 

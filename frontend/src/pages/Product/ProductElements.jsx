@@ -6,7 +6,7 @@ export const Container = styled.div``;
 export const Wrapper = styled.div`
   padding: 50px;
   display: flex;
-  ${mobile({ padding: '10px', flexDirection: 'column'})}
+  ${mobile({ padding: '10px', flexDirection: 'column' })}
 `;
 
 export const ImgContainer = styled.div`
@@ -61,6 +61,7 @@ export const FilterColor = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 50%;
+  box-shadow: 3px 3px #ccc;
   background-color: ${(props) => props.color};
   margin: 0px 5px;
   cursor: pointer;
@@ -108,3 +109,8 @@ export const Button = styled.button`
       background-color: #f8f4f4;
   }
 `;
+
+export const ErrorText = styled.span`
+  color: red;
+  display: ${prop => prop.errorchoose ? 'none' : 'block'};
+`

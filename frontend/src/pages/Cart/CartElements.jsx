@@ -49,6 +49,8 @@ export const Info = styled.div`
   flex: 3;
 `;
 
+export const ProductWrapper = styled.div``
+
 export const Product = styled.div`
   display: flex;
   justify-content: space-between;
@@ -80,6 +82,7 @@ export const ProductColor = styled.div`
   height: 20px;
   border-radius: 50%;
   background-color: ${(props) => props.color};
+  box-shadow: 3px 3px #ccc;
 `;
 
 export const ProductSize = styled.span``;
@@ -91,6 +94,20 @@ export const PriceDetail = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const ProductRemove = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+`
+export const RemoveBtn = styled.span`
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  margin-right: 10px;
+    ${mobile({ marginRight: '10px', marginBottom: '50px' })}
+`
 
 export const ProductAmountContainer = styled.div`
   display: flex;

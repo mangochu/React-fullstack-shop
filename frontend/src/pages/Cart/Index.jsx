@@ -2,13 +2,14 @@ import { Add, Remove } from "@material-ui/icons";
 import Announcement from "../../components/Announcement"
 import Footer from "../../components/Footer"
 import Navbar from "../../components/Navbar"
-import { Bottom, Button, Container, Details, Hr, Image, Info, PriceDetail, Product, ProductAmount, ProductAmountContainer, ProductColor, ProductDetail, ProductId, ProductName, ProductPrice, ProductSize, Summary, SummaryItem, SummaryItemPrice, SummaryItemText, SummaryTitle, Title, Top, TopButton, TopText, TopTexts, Wrapper } from "./CartElements";
-import { useSelector } from 'react-redux'
+import { Bottom, Button, Container, Details, Hr, Image, Info, PriceDetail, Product, ProductAmount, ProductAmountContainer, ProductColor, ProductDetail, ProductId, ProductName, ProductPrice, ProductRemove, ProductSize, ProductWrapper, RemoveBtn, Summary, SummaryItem, SummaryItemPrice, SummaryItemText, SummaryTitle, Title, Top, TopButton, TopText, TopTexts, Wrapper } from "./CartElements";
+import { useDispatch, useSelector } from 'react-redux'
 import StripeCheckout from 'react-stripe-checkout'
 import { useEffect, useState } from "react";
 import { userRequest } from '../../requestMethods'
 import { useNavigate } from 'react-router-dom'
 import Sidebar from "../../components/Sidebar";
+import { addToCart, clearCart, decreaseCart, removeFromCart } from "../../redux/cartRedux";
 
 const avatar = require("./../../assets/images/avatar.gif").default
 
@@ -16,9 +17,11 @@ const KEY = process.env.REACT_APP_STRIPE
 
 const Cart = () => {
   const cart = useSelector(state => state.cart)
+  const quantity = useSelector(state => state.cart.quantity)
   const [stripeToken, setStripeToken] = useState(null)
   const history = useNavigate()
   const [isOpen, setIsOpen] = useState(false)
+  const dispatch = useDispatch()
 
   const toggle = () => {
     setIsOpen(!isOpen)
@@ -26,6 +29,22 @@ const Cart = () => {
 
   const onToken = token => {
     setStripeToken(token)
+  }
+
+  const handleDecreaseCart = (item) => {
+    dispatch(decreaseCart(item))
+  }
+  
+  const handleAddToCart = (item) => {
+    dispatch(addToCart(item))
+  }
+  
+    const handleRemoveFromCart = (item) => {
+      dispatch(removeFromCart(item))
+    }
+  
+  const handleClearCart = () => {
+    dispatch(clearCart())
   }
 
   useEffect(() => {
@@ -43,22 +62,22 @@ const Cart = () => {
   return (
     <Container>
       <Sidebar isOpen={isOpen} toggle={toggle} />
-      <Navbar toggle={toggle} />
       <Announcement />
+      <Navbar toggle={toggle} />
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton onClick={()=>history(-1)}>CONTINUE SHOPPING</TopButton>
+          <TopButton onClick={() => history(-1)}>CONTINUE SHOPPING</TopButton>
           <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
+            <TopText>Shopping Cart ({quantity})</TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
+          <TopButton type="filled" onClick={() => handleClearCart()}>CLEAR CART</TopButton>
         </Top>
         <Bottom>
           <Info>
             {cart.products.map(product => (
-              <>
+              <ProductWrapper key={product._id}>
                 <Product>
                   <ProductDetail>
                     <Image src={product.img} />
@@ -77,15 +96,18 @@ const Cart = () => {
                   </ProductDetail>
                   <PriceDetail>
                     <ProductAmountContainer>
-                      <Remove />
-                      <ProductAmount>{product.quantity}</ProductAmount>
-                      <Add />
+                      <Remove onClick={() => { handleDecreaseCart(product) }} />
+                      <ProductAmount>{product.cartQuantity}</ProductAmount>
+                      <Add onClick={() => handleAddToCart(product)} />
                     </ProductAmountContainer>
-                    <ProductPrice>$ {product.price * product.quantity}</ProductPrice>
+                    <ProductPrice>$ {product.price * product.cartQuantity}</ProductPrice>
                   </PriceDetail>
+                  <ProductRemove>
+                    <RemoveBtn onClick={() => handleRemoveFromCart(product)} >Remove</RemoveBtn>
+                  </ProductRemove>
                 </Product>
                 <Hr />
-              </>
+              </ProductWrapper>
             ))}
           </Info>
           <Summary>
@@ -96,11 +118,11 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+              <SummaryItemPrice>$ 0.00</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+              <SummaryItemPrice>$ 0.00</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
