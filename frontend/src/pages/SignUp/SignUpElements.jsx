@@ -53,3 +53,7 @@ export const Button = styled.button`
   color: white;
   cursor: pointer;
 `;
+
+export const Error = styled.span`
+  color: red;
+`
